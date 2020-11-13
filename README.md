@@ -1,6 +1,3 @@
 ### `Sorting Test App`
-install dependencies:
-yarn
-
-run the app
-yarn start
+yarn to install dependencies:
+yarn start to run the app
