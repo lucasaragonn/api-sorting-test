@@ -1,13 +1,14 @@
 import React from 'react';
-import { useSortData } from '../hooks';
+import { useSortPlanets } from '../hooks';
+import { IPlanet } from '../interfaces';
 import styles from './index.module.scss';
 
 interface PlanetProps {
-  data: []
+  data: IPlanet[];
 }
 
 const Planets = ({ data }: PlanetProps) => {
-  const { items, sort } = useSortData(data);
+  const { items, sort } = useSortPlanets(data);
 
   return (
     <div className={styles.planetsContainer}>
@@ -21,7 +22,7 @@ const Planets = ({ data }: PlanetProps) => {
           </tr>
         </thead>
         <tbody>
-          {items.map((planet: any, index)=> (
+          {items.map((planet: IPlanet, index: number)=> (
             <tr key={index}>
               <td>{planet.name}</td>
               <td>{planet.climate}</td>

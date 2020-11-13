@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { IPlanet, IConfig } from '../interfaces';
 
 export const useFetch = (url: string, ref: React.MutableRefObject<boolean>) => {
   const [data, setData] = useState(null);
@@ -33,12 +34,7 @@ export const useFetch = (url: string, ref: React.MutableRefObject<boolean>) => {
 
 };
 
-interface IConfig {
-  key: string;
-  direction: string;
-};
-
-export const useSortData = (items: []) => {
+export const useSortPlanets = (items: IPlanet[]) => {
 
   const [sortConfig, setSortConfig] = React.useState<IConfig>(null);
   
@@ -47,7 +43,7 @@ export const useSortData = (items: []) => {
 
     if (sortConfig !== null) {
       const options = { numeric: true, sensitivity: 'base' };
-      sortableItems.sort((a: any, b: any) => {
+      sortableItems.sort((a, b) => {
         return sortConfig.direction === 'ascending' ? 
           a[sortConfig.key].localeCompare(b[sortConfig.key], undefined, options): 
           b[sortConfig.key].localeCompare(a[sortConfig.key], undefined, options);
