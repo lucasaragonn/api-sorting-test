@@ -6,7 +6,7 @@ const App = () => {
   const isComponentMounted = useRef(true);
 
   const { data, loading, error } = useFetch(
-    'http://swapi.dev/api/planets/',
+    'https://swapi.dev/api/planets/',
     isComponentMounted,
   );
 
