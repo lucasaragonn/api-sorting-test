@@ -37,10 +37,7 @@ interface IConfig {
   key: string;
   direction: string;
 };
-const parseValue = (value: string) => {
-  const toNumber = parseInt(value);
-  return isNaN(toNumber) ? value : toNumber;
-}
+
 export const useSortData = (items: []) => {
 
   const [sortConfig, setSortConfig] = React.useState<IConfig>(null);
@@ -49,20 +46,12 @@ export const useSortData = (items: []) => {
     let sortableItems = [...items];
 
     if (sortConfig !== null) {
-
+      const options = { numeric: true, sensitivity: 'base' };
       sortableItems.sort((a: any, b: any) => {
-        const parsedA = parseValue(a[sortConfig.key]);
-        const parsedB = parseValue(b[sortConfig.key]);
-
-        if (parsedA < parsedB) {
-          return sortConfig.direction === 'ascending' ? -1 : 1;
-        }
-        if (parsedA > parsedB) {
-          return sortConfig.direction === 'ascending' ? 1 : -1;
-        }
-        return 0;
+        return sortConfig.direction === 'ascending' ? 
+          a[sortConfig.key].localeCompare(b[sortConfig.key], undefined, options): 
+          b[sortConfig.key].localeCompare(a[sortConfig.key], undefined, options);
       });
-
     }
 
     return sortableItems;
